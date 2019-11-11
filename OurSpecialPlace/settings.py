@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recommendation.apps.RecommendationConfig'
+    'recommendation.apps.RecommendationConfig',
+    'region.apps.RegionConfig',
+    'place.apps.PlaceConfig',
 ]
 
 MIDDLEWARE = [
