@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recommend system</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                method: 'get',
+                url: '{% url 'place:list_api' %}',
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+        })
+    </script>
+
+
+</body>
+</html>
