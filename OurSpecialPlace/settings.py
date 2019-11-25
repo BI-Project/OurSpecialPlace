@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recommendation.apps.RecommendationConfig',
     'place.apps.PlaceConfig',
+    'accounts.apps.AccountsConfig',
     'rest_framework',
 ]
 
@@ -131,3 +132,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static/')
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_REDIRECT_URL = 'choice/'
