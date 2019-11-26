@@ -9,7 +9,7 @@ class PlaceSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'picture',
-            'title',
+            'name',
             'natural_city',
             'static_dynamic',
             'mountain_sea',
