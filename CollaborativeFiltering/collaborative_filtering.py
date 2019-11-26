@@ -1,5 +1,6 @@
-from recommendation_data import dataset
+from CollaborativeFiltering.recommendation_data import dataset
 from math import sqrt
+
 
 class CollaborativeFiltering:
     def __init__(self, dataset):
@@ -27,8 +28,6 @@ class CollaborativeFiltering:
         sum_of_eclidean_distance = sum(sum_of_eclidean_distance)
 
         return 1/(1+sqrt(sum_of_eclidean_distance))
-
-
 
     def pearson_correlation(self, person1, person2):
         # To get both rated items
@@ -107,7 +106,8 @@ class CollaborativeFiltering:
         # returns the recommended items
         recommendataions_list = [recommend_item for score,recommend_item in rankings]
         return recommendataions_list
-		
+
+
 if __name__ == "__main__":
     collabo = CollaborativeFiltering(dataset)
     print(collabo.user_reommendations('Toby'))

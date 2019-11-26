@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.views.generic import View
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
@@ -25,3 +26,9 @@ class PlaceChoiceTemplateView(TemplateView):
 
 class ThanksTemplateView(TemplateView):
     template_name = 'place/thanks.html'
+
+
+class UserProfileReceiveView(View):
+
+    def post(self, request, *args, **kwargs):
+        pass
