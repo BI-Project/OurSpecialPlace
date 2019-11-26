@@ -14,8 +14,9 @@ class Place(models.Model):
     season = models.IntegerField(default=0)
     day_N_night = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
-    comment = models.TextField
+    comment = models.TextField()
+    star = models.IntegerField(default=0)
+    liked_user = models.ManyToManyField('accounts.User', blank=True, related_name='place')
 
     def __str__(self):
         return self.name
- 
