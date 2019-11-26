@@ -1,26 +1,590 @@
-<!doctype html>
-<html lang="ko">
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recommend system</title>
+    <title>OurSpecialPlace</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        :root {
+            --input-padding-x: 1.5rem;
+            --input-padding-y: .75rem;
+        }
+
+        body {
+            background: lightskyblue;
+            background: linear-gradient(to right, #0062E6, lightskyblue);
+        }
+
+        .card-signin {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-signin .card-title {
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+
+        .card-signin .card-img-left {
+            width: 45%;
+            /* Link to your background image using in the property below! */
+            background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+            background-size: cover;
+        }
+
+        .card-signin .card-body {
+            padding: 2rem;
+        }
+
+        .form-signin {
+            width: 100%;
+        }
+
+        .form-signin .btn {
+            font-size: 80%;
+            border-radius: 5rem;
+            letter-spacing: .1rem;
+            font-weight: bold;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-label-group input {
+            height: auto;
+            border-radius: 2rem;
+        }
+
+        .form-label-group>input,
+        .form-label-group>label {
+            padding: var(--input-padding-y) var(--input-padding-x);
+        }
+
+        .form-label-group>label {
+            position: absolute;
+            top: 0  ;
+            left: 0;
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+            /* Override default `<label>` margin */
+            line-height: 1.5;
+            color: #495057;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            transition: all .1s ease-in-out;
+        }
+
+        .form-label-group input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-moz-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:not(:placeholder-shown) {
+            padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+            padding-bottom: calc(var(--input-padding-y) / 3);
+        }
+
+        .form-label-group input:not(:placeholder-shown)~label {
+            padding-top: calc(var(--input-padding-y) / 3);
+            padding-bottom: calc(var(--input-padding-y) / 3);
+            font-size: 12px;
+            color: #777;
+        }
+        h1 { color: #0062E6; font-family: 'Vollkorn', serif; font-size: 500px;font-weight: 500; margin-bottom: 0px; margin-top: 40px; text-align: center; text-shadow: 0 1px 1px black; }
+
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+        .rate:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+        }
+        .rate:not(:checked) > label {
+            float:right;
+            width:1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:30px;
+            color:#ccc;
+        }
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+
+        /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 <body>
-    <script type="text/javascript">
-        $(function () {
-            $.ajax({
-                method: 'get',
-                url: '{% url 'place:list_api' %}',
-                success: function (data) {
-                    console.log(data)
+<script type="text/javascript">
+    var places = {};
+    var choiceimg = new Array();
+    var choicename = new Array();
+    var choiceid = new Array();
+    var final = {};
+    final['accessibility'] = 0;
+    final['age'] = 0;
+    final['day_N_night'] = 0;
+    final['dormitory_hotel'] = 0;
+    final['history_modern'] = 0;
+    final['mountain_sea'] = 0;
+    final['natural_city'] = 0;
+    final['save_flex'] = 0;
+    final['season'] = 0;
+    final['static_dynamic'] = 0;
+    $(function () {
+        $.ajax({
+            method: 'get',
+            url: '{% url 'place:list_api' %}',
+            success: function (data) {
+                console.log(data);
+                places = data;
+                console.log(places);
+                for (var key in places) {
+                    choicename[key] = places[key].name;
+                    choiceimg[key] = places[key].picture;
+                    choiceid[key] = places[key].id;
                 }
-            })
+
+                $('#place0').attr("src",choiceimg[0]);
+                $('#place1').attr("src",choiceimg[1]);
+                $('#place2').attr("src",choiceimg[2]);
+                $('#place3').attr("src",choiceimg[3]);
+                $('#place4').attr("src",choiceimg[4]);
+                $('#place5').attr("src",choiceimg[5]);
+                $('#place6').attr("src",choiceimg[6]);
+                $('#place7').attr("src",choiceimg[7]);
+
+                $('#place8').attr("src",choiceimg[8]);
+                $('#place9').attr("src",choiceimg[9]);
+                $('#place10').attr("src",choiceimg[10]);
+                $('#place11').attr("src",choiceimg[11]);
+
+                $('#place12').attr("src",choiceimg[12]);
+                $('#place13').attr("src",choiceimg[13]);
+                $('#place14').attr("src",choiceimg[14]);
+                $('#place15').attr("src",choiceimg[15]);
+
+                $('#place16').attr("src",choiceimg[16]);
+                $('#place17').attr("src",choiceimg[17]);
+                $('#place18').attr("src",choiceimg[18]);
+                $('#place19').attr("src",choiceimg[19]);
+
+
+            }
         })
-    </script>
+    })
+
+    var selected_places = new Array();
+    function load1() {
+        var content_id = document.getElementById("first").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load2(clicked_id) {
+        selected_places[0]=clicked_id;
+        var content_id = document.getElementById("second").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load3(clicked_id) {
+        selected_places[1]=clicked_id;
+        var content_id = document.getElementById("third").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load4(clicked_id) {
+        selected_places[2]=clicked_id;
+        var content_id = document.getElementById("fourth").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load5(clicked_id) {
+        selected_places[3]=clicked_id;
+        var content_id = document.getElementById("fifth").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load6(clicked_id) {
+        selected_places[4]=clicked_id;
+        var content_id = document.getElementById("sixth").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load7(clicked_id) {
+        selected_places[5]=clicked_id;
+        var content_id = document.getElementById("seventh").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load8(clicked_id) {
+        selected_places[6]=clicked_id;
+        var content_id = document.getElementById("eight").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load9(clicked_id) {
+        selected_places[7]=clicked_id;
+        var content_id = document.getElementById("ninth").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load10(clicked_id) {
+        selected_places[8]=clicked_id;
+        var content_id = document.getElementById("tenth").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
+    }
+    function load11(clicked_id) {
+        selected_places[9]=clicked_id;
+        var content_id = document.getElementById("final").innerHTML;
+        for(var i=0;i<10;i++){
+            final['accessibility'] += places[selected_places[i]].accessibility;
+            final['age'] += places[selected_places[i]].age;
+            final['day_N_night'] += places[selected_places[i]].day_N_night;
+            final['dormitory_hotel'] += places[selected_places[i]].dormitory_hotel;
+            final['history_modern'] += places[selected_places[i]].history_modern;
+            final['mountain_sea'] += places[selected_places[i]].mountain_sea;
+            final['natural_city'] += places[selected_places[i]].natural_city;
+            final['save_flex'] += places[selected_places[i]].save_flex;
+            final['season'] += places[selected_places[i]].season;
+            final['static_dynamic'] += places[selected_places[i]].static_dynamic;
+        }
+        final['accessibility'] /= 10;
+        final['age'] /= 10;
+        final['day_N_night'] /= 10;
+        final['dormitory_hotel'] /= 10;
+        final['history_modern'] /= 10;
+        final['mountain_sea'] /= 10;
+        final['natural_city'] /= 10;
+        final['save_flex'] /= 10;
+        final['season'] /= 10;
+        final['static_dynamic'] /= 10;
+
+        $.ajax({
+            method: 'post',
+            url: '{% url 'place:user_profile_receive' %}',
+            data: final,
+            success: function (data) {
+                alert("~");
+            }
+        })
+
+        document.getElementById("zero").innerHTML = content_id;
+
+    }
 
 
+
+
+
+    {#def calc_user_attr(choose_data):#}
+    {#data_amount = len(choose_data)#}
+    {#totsum = choose_data.pop()#}
+    {#while choose_data:#}
+    {#    temp = choose_data.pop()#}
+    {#    for i, val in enumerate(temp):#}
+    {#        totsum[i] += val#}
+    {##}
+    {#mean_list = [x / data_amount for x in totsum]#}
+    {##}
+    {#return mean_list#}
+</script>
+
+<div class="container" id="zero">
+    <div class="row" style="margin-top: 170px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px">
+                        <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 300px">
+                    </div>
+                    <button class="btn" onclick="load1()">Getting started!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="first" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton0" onclick="load2('0')" type="submit"><img id="place0" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton1" onclick="load2('1')" type="submit"><img id="place1" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="second" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" id="third" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" id="fourth" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="fifth" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" id="sixth" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" id="seventh" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="eight" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'accounts:login' %}">로그인</a>
+
+<a href="{% url 'accounts:logout' %}">로그아웃</a>
+
+<a href="{% url 'accounts:signup' %}">횐갑</a>
+<div class="container" id="ninth" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="tenth" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    </div>
+                    <div style="width: 100px;height:300px;float: left;"></div>
+                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
+                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="final" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>BI PROJECT</h1><br>
+                    <div style="height: 200px;margin-bottom: 20px;float: left">
+                        <img id="final_place_img" src="" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 200px;height: 200px;float: left;">
+                    </div>
+                    <p style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">천지연폭포</p>
+                    <br><br>
+                    <div id="final_place_name" style="float: left"></div><br>
+                    <div id="final_place_comment" >이 곳은 제주도 여행지로 어쩌구저쩌구</div>
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" checked="checked"/>
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3"/>
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2"/>
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1"/>
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                    <div style="height: 100px;"></div>
+                    <button class="btn" style="float: bottom" onclick="more()">더 많은 추천을 받고 싶나요?</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
