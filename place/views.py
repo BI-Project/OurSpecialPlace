@@ -13,6 +13,9 @@ from CollaborativeFiltering.collaborative_filtering import CollaborativeFilterin
 
 from place.models import UserPlaceStar
 
+from place.models import UserPlaceStar
+
+import json
 login_url = reverse_lazy('accounts:login')
 
 
@@ -36,6 +39,7 @@ class ThanksTemplateView(TemplateView):
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
+
 
         result_list=[]
 
@@ -68,9 +72,7 @@ class UserProfileReceiveView(View):
         result_dict = {}
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
-
             result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
-
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
