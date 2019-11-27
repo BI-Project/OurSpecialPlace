@@ -13,6 +13,7 @@ from place.models import Place
 from place.serializer import PlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
+import json
 
 login_url = reverse_lazy('accounts:login')
 
@@ -57,7 +58,7 @@ class UserProfileReceiveView(View):
         result_dict = {}
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
-            result_dict[key] = [place_object.picture, place_object.name, place_object.pk, place_object.comment]
+            result_dict[key] = [(str(place_object.picture)), place_object.name, place_object.pk, place_object.comment]
             place_object.liked_user.add(request.user)
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
