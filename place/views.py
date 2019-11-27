@@ -1,12 +1,17 @@
-from django.contrib.auth.decorators import login_required
-from django.views.generic import View
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from django.views.generic import View
 from rest_framework import mixins, generics
 
 from place.models import Place
 from place.serializer import PlaceSerializer
+from recommendation.src import Spot_list
+from recommendation.src.MakeResult import FunctionBox
+from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
+
+from place.models import UserPlaceStar
 
 from place.models import UserPlaceStar
 
@@ -34,7 +39,7 @@ class ThanksTemplateView(TemplateView):
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
-        pass
+
 
         result_list=[]
 

@@ -32,7 +32,7 @@ class FunctionBox:
 
     def Ranking(self):
         temp = sorted(list(self.cos_data.values()))
-        top_ten = temp[::-1][:10]
+        top_ten = temp[::-1][:3]
         for score in top_ten:
             for name in self.cos_data.keys():
                 if score == self.cos_data[name]:
