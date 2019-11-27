@@ -1,6 +1,10 @@
+from django.core.serializers import serialize
+from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.encoding import force_text
+from django.utils.functional import Promise
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
@@ -30,6 +34,13 @@ class ThanksTemplateView(TemplateView):
     template_name = 'place/thanks.html'
 
 
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Promise):
+            return force_text(obj)
+        return super(LazyEncoder, self).default(obj)
+
+
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
@@ -52,7 +63,7 @@ class UserProfileReceiveView(View):
         key_list = []
         result_dict = {}
         for key in result.keys():
-            result_dict[key] = get_object_or_404(Place, name=key)
-
+            result_dict[key] = serialize('json', get_object_or_404(Place, name=key), cls=LazyEncoder)
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
+
