@@ -161,8 +161,17 @@
         .rate > label:hover ~ input:checked ~ label {
             color: #c59b08;
         }
-
-        /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+        .example_b {
+            color: #fff !important;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #60a3bc;
+            padding: 20px;
+            border-radius: 50px;
+            display: inline-block;
+            border: none;
+            transition: all 0.4s ease 0s;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -374,6 +383,8 @@
                 alert("success");
             }
         });
+        var content_id = document.getElementById("final_final").innerHTML;
+        document.getElementById("zero").innerHTML = content_id;
     }
 
 </script>
@@ -392,7 +403,9 @@
                     <div style="height: 300px;margin-bottom: 20px">
                         <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 300px">
                     </div>
-                    <button class="btn" onclick="load1()">Getting started!</button>
+                    <div class="button_cont" align="center">
+                        <button class="example_b" onclick="load1()" style="width: 200px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>Getting started!</b></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -406,11 +419,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton0" onclick="load2('0')" type="submit"><img id="place0" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                        <button class="btn" id="placebutton0" onclick="load2('0')" type="submit"><img id="place0" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton1" onclick="load2('1')" type="submit"><img id="place1" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton1" onclick="load2('1')" type="submit"><img id="place1" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
@@ -422,14 +437,16 @@
     <div class="row" style="margin-top: 150px;">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
-                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%;border-radius:20px;">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -445,11 +462,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>
                     </div>
                 </div>
             </div>
@@ -466,11 +485,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -485,11 +506,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left;" src=""></button>
                     </div>
                 </div>
             </div>
@@ -506,11 +529,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -526,11 +551,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -545,11 +572,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -564,11 +593,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src=""></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width: 300px;float: left">
+                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
                     </div>
                 </div>
             </div>
@@ -582,11 +613,13 @@
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
                     <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
                     </div>
-                    <div style="width: 100px;height:300px;float: left;"></div>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="height: 300px;margin-bottom: 20px;width:320px;float: left" src="" alt="" ></button>
+                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div>
+                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
+                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
@@ -598,29 +631,55 @@
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
-                    <h1>BI PROJECT</h1><br>
-                    <div style="height: 200px;margin-bottom: 20px;float: left">
-                        <img id="final_place_img" src="" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 200px;height: 200px;float: left;">
-                    </div>
-                    <p id="final_place_name" style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;"></p>
-                    <br><br>
-                    {#                    <div id="final_place_name" style="float: left"></div><br>#}
-                    <div id="final_place_comment" ></div>
-                    <div class="rate">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" checked="checked"/>
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3"/>
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2"/>
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1"/>
-                        <label for="star1" title="text">1 star</label>
-                    </div>
-                    <div style="height: 100px;"></div>
-                    <button class="btn" style="float: bottom" onclick="more()">더 많은 추천을 받고 싶나요?</button>
+                    <h1>Recommend Place For You</h1><br>
+                    <div>
+                        <div style="height: 200px;margin-bottom: 20px;float: left">
+                            <img id="final_place_img" src="" style="border-radius:20px;display: flex;overflow: hidden;align-content: center;justify-content: center;width: 300px;height: 300px;float: left;">
+                        </div>
+                        <p id="final_place_name" style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;"></p>
+                        <br><br>
+                        {#                    <div id="final_place_name" style="float: left"></div><br>#}
+                        <div id="final_place_comment" ></div>
 
+                        <div class="rate" style="float: right;margin-top: 130px;">
+                            <p style=" color: #f2f2f2;background: #2b669a; font-size: 15px; line-height: 20px;border-radius: 10px; margin: 0 5px 24px; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">별점을 매겨주세요!</p>
+
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" checked="checked"/>
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3"/>
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2"/>
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1"/>
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                    </div>
+                    <button class="example_b" onclick="more()" style="float:right;margin-top:100px;width: 400px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>더 많은 추천을 받고 싶나요?</b></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="final_final" style="display: none">
+    <div class="row" style="margin-top: 150px;">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5" style="border-radius: 5%">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                    <h1>Recommend Place For You</h1><br>
+                    <div>
+                        <div style="height: 200px;margin-bottom: 20px;float: left">
+                            <img id="final_final_place_img" src="" style="border-radius:20px;display: flex;overflow: hidden;align-content: center;justify-content: center;width: 300px;height: 300px;float: left;">
+                        </div>
+                        <p id="final_final_place_name" style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;"></p>
+                        <br><br>
+                        {#                    <div id="final_place_name" style="float: left"></div><br>#}
+                        <div id="final_final_place_comment" ></div>
+
+                    </div>
+                    <button class="example_b" onclick="" style="float:right;margin-top:200px;width: 400px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>감사합니다~</b></button>
 
                 </div>
             </div>
