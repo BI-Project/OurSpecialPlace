@@ -34,13 +34,6 @@ class ThanksTemplateView(TemplateView):
     template_name = 'place/thanks.html'
 
 
-class LazyEncoder(DjangoJSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Promise):
-            return force_text(obj)
-        return super(LazyEncoder, self).default(obj)
-
-
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
@@ -63,7 +56,15 @@ class UserProfileReceiveView(View):
         key_list = []
         result_dict = {}
         for key in result.keys():
-            result_dict[key] = serialize('json', get_object_or_404(Place, name=key), cls=LazyEncoder)
+            place_object = get_object_or_404(Place, name=key)
+            result_dict[key] = [place_object.picture, place_object.name, place_object.pk, place_object.comment]
+            place_object.liked_user.add(request.user)
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
+
+class UserStarReceiveView(View):
+
+    def post(self, request, *args, **kwargs):
+        pk = request.POST.get('pk')
+        star = request.POST.get('data')
