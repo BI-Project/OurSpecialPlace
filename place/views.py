@@ -73,7 +73,6 @@ class UserProfileReceiveView(View):
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
             result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
-            # place_object.liked_user.add(request.user)
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
@@ -95,8 +94,6 @@ class UserStarReceiveView(View):
         user_place.save()
 
         UserPlaceStar.objects.filter(place=place_name)
-
-
 
         collabo = CollaborativeFiltering(user_place_dict)
 
