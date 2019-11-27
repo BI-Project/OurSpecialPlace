@@ -1,12 +1,14 @@
-from django.contrib.auth.decorators import login_required
-from django.views.generic import View
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from django.views.generic import View
 from rest_framework import mixins, generics
 
 from place.models import Place
 from place.serializer import PlaceSerializer
+from recommendation.src import Spot_list
+from recommendation.src.MakeResult import FunctionBox
 
 login_url = reverse_lazy('accounts:login')
 
@@ -31,4 +33,26 @@ class ThanksTemplateView(TemplateView):
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
-        pass
+
+        result_list=[]
+
+        result_list.append(request.POST.get('natural_city'))
+        result_list.append(request.POST.get('static_dynamic'))
+        result_list.append(request.POST.get('mountain_sea'))
+        result_list.append(request.POST.get('history_modern'))
+        result_list.append(request.POST.get('save_flex'))
+        result_list.append(request.POST.get('accessibility'))
+        result_list.append(request.POST.get('dormitory_hotel'))
+        result_list.append(request.POST.get('day_N_night'))
+        result_list.append(request.POST.get('age'))
+
+        topten = FunctionBox(result_list, Spot_list.data_list)
+        topten.CosSimilarity()
+        result = topten.Ranking() #return dict
+        key_list = []
+        result_dict = {}
+        for key in result.keys():
+            result_dict[key] = get_object_or_404(Place, name=key)
+
+        context = {'message': result_dict}
+        return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
