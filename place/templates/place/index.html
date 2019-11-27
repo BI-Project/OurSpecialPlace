@@ -233,6 +233,9 @@
     })
 
     var selected_places = new Array();
+    var star_place = {};
+    var star_place_name;
+    var star_place_pk;
     function load1() {
         var content_id = document.getElementById("first").innerHTML;
         document.getElementById("zero").innerHTML = content_id;
@@ -297,17 +300,20 @@
             final['season'] += places[selected_places[i]].season;
             final['static_dynamic'] += places[selected_places[i]].static_dynamic;
         }
-        final['accessibility'] /= 10;
-        final['age'] /= 10;
-        final['day_N_night'] /= 10;
-        final['dormitory_hotel'] /= 10;
-        final['history_modern'] /= 10;
-        final['mountain_sea'] /= 10;
-        final['natural_city'] /= 10;
-        final['save_flex'] /= 10;
-        final['season'] /= 10;
-        final['static_dynamic'] /= 10;
+        final['accessibility'] = Math.floor(final['accessibility']/10);
+        final['age'] =Math.floor(final['age']/10);
+        final['day_N_night'] = Math.floor(final['day_N_night']/10);
+        final['dormitory_hotel'] = Math.floor(final['dormitory_hotel']/10);
+        final['history_modern'] =Math.floor(final['history_modern']/10);
+        final['mountain_sea'] = Math.floor(final['mountain_sea']/10);
+        final['natural_city'] = Math.floor(final['natural_city']/10);
+        final['save_flex'] = Math.floor(final['save_flex']/10);
+        final['season'] = Math.floor(final['season']/10);
+        final['static_dynamic'] = Math.floor(final['static_dynamic']/10);
         var token = '{{ csrf_token }}';
+        var result = {};
+        var ss ="http://127.0.0.1:8000/";
+        var img_src;
 
         $.ajax({
             headers: { 'X-CSRFToken' : token },
@@ -315,29 +321,61 @@
             url: '{% url 'place:user_profile_receive' %}',
             data: final,
             success: function (data) {
-                alert("~");
+                console.log(data['message']);
+                for(var name in data['message']){
+                    img_src = ss.concat(data['message'][name][0]);
+                    $('#final_place_img').attr("src",img_src);
+
+                    $("#final_place_name").append(data['message'][name][1]);
+                    $('#final_place_comment').append(data['message'][name][3]);
+                    {#star_place_name = data['message'][name][1];#}
+                    {#star_place_pk = data['message'][name][2];#}
+                    star_place['pk'] = data['message'][name][2];
+                    star_place['name'] = data['message'][name][1];
+                    break;
+                }
             }
         });
 
         document.getElementById("zero").innerHTML = content_id;
 
     }
+    function more() {
+        var star_count;
+        if($("#star5").is(":checked")) {
+            star_count=5;
+        }
+        else if($("#star4").is(":checked")){
+            star_count=4;
+        }
+        else if($("#star3").is(":checked")){
+            star_count=3;
+        }
+        else if($("#star2").is(":checked")){
+            star_count=2;
+        }
+        else if($("#star1").is(":checked")){
+            star_count=1;
+        }
+        else{
+            star_count=0;
+        }
+        star_place['star'] = star_count;
 
 
+        var token = '{{ csrf_token }}';
 
+        $.ajax({
+            headers: { 'X-CSRFToken' : token },
+            method: 'post',
+            url: '{% url 'place:user_star_receive' %}',
+            data: star_place,
+            success: function (data) {
+                alert("success");
+            }
+        });
+    }
 
-
-    {#def calc_user_attr(choose_data):#}
-    {#data_amount = len(choose_data)#}
-    {#totsum = choose_data.pop()#}
-    {#while choose_data:#}
-    {#    temp = choose_data.pop()#}
-    {#    for i, val in enumerate(temp):#}
-    {#        totsum[i] += val#}
-    {##}
-    {#mean_list = [x / data_amount for x in totsum]#}
-    {##}
-    {#return mean_list#}
 </script>
 <br><br>
 <a href="{% url 'accounts:login' %}"><img src="{% static 'img/login.png' %}" style="width: 40px;height: 40px;float: right;margin-right: 30px;"></a>
@@ -564,10 +602,10 @@
                     <div style="height: 200px;margin-bottom: 20px;float: left">
                         <img id="final_place_img" src="" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 200px;height: 200px;float: left;">
                     </div>
-                    <p style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">천지연폭포</p>
+                    <p id="final_place_name" style=" color: #f2f2f2; background: #2e6da4; font-size: 20px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;"></p>
                     <br><br>
-                    <div id="final_place_name" style="float: left"></div><br>
-                    <div id="final_place_comment" >이 곳은 제주도 여행지로 어쩌구저쩌구</div>
+                    {#                    <div id="final_place_name" style="float: left"></div><br>#}
+                    <div id="final_place_comment" ></div>
                     <div class="rate">
                         <input type="radio" id="star5" name="rate" value="5" />
                         <label for="star5" title="text">5 stars</label>
