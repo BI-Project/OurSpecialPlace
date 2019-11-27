@@ -1,10 +1,6 @@
-from django.core.serializers import serialize
-from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.utils.encoding import force_text
-from django.utils.functional import Promise
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
@@ -13,7 +9,7 @@ from place.models import Place
 from place.serializer import PlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
-import json
+from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 
 login_url = reverse_lazy('accounts:login')
 
@@ -68,4 +64,16 @@ class UserStarReceiveView(View):
 
     def post(self, request, *args, **kwargs):
         pk = request.POST.get('pk')
-        star = request.POST.get('data')
+        place_name = request.POST.get('name')
+        star = request.POST.get('star')
+        user = request.user
+        user_place_dict = {}
+        place_star_dict = {}
+        place_star_dict[place_name] = int(star)
+        user_place_dict[user] = place_star_dict
+
+        collabo = CollaborativeFiltering(user_place_dict)
+
+        context = {'message': collabo.user_reommendations(user)}
+
+        return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
