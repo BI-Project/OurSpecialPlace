@@ -36,15 +36,15 @@ class UserProfileReceiveView(View):
 
         result_list=[]
 
-        result_list.append(request.POST.get('natural_city'))
-        result_list.append(request.POST.get('static_dynamic'))
-        result_list.append(request.POST.get('mountain_sea'))
-        result_list.append(request.POST.get('history_modern'))
-        result_list.append(request.POST.get('save_flex'))
-        result_list.append(request.POST.get('accessibility'))
-        result_list.append(request.POST.get('dormitory_hotel'))
-        result_list.append(request.POST.get('day_N_night'))
-        result_list.append(request.POST.get('age'))
+        result_list.append(int(request.POST.get('natural_city')))
+        result_list.append(int(request.POST.get('static_dynamic')))
+        result_list.append(int(request.POST.get('mountain_sea')))
+        result_list.append(int(request.POST.get('history_modern')))
+        result_list.append(int(request.POST.get('save_flex')))
+        result_list.append(int(request.POST.get('accessibility')))
+        result_list.append(int(request.POST.get('dormitory_hotel')))
+        result_list.append(int(request.POST.get('day_N_night')))
+        result_list.append(int(request.POST.get('age')))
 
         topten = FunctionBox(result_list, Spot_list.data_list)
         topten.CosSimilarity()
