@@ -307,11 +307,15 @@
         final['save_flex'] /= 10;
         final['season'] /= 10;
         final['static_dynamic'] /= 10;
+        var token = '{{ csrf_token }}';
 
         $.ajax({
+            headers: { 'X-CSRFToken' : token },
             method: 'post',
             url: '{% url 'place:user_profile_receive' %}',
-            data: final,
+            data: {
+                data : final
+            },
             success: function (data) {
 
             }

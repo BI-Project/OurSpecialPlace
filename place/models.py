@@ -20,3 +20,9 @@ class Place(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class UserPlaceStar(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='userplacestar')
+    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='userplacestar')
+    star = models.IntegerField(default=0)
