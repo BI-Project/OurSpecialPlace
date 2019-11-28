@@ -126,7 +126,7 @@ class UserStarReceiveView(View):
             another_dict[temp] = [(str(place_object.picture.url)), place_object.name, place_object.pk,
                                            place_object.comment]
 
-            return temp
+            return another_dict
         another_place = another_place[0]
         another_dict = {}
 
