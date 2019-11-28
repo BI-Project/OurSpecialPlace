@@ -65,8 +65,8 @@ class UserProfileReceiveView(View):
                     recommend.append(key)
         count = 0
         n = len(recommend)
-        if n > 5:
-            n = n-5
+        if n > 3:
+            n = n-3
             for item in recommend:
                 if count < n:
                     recommend.pop(0)
@@ -99,7 +99,7 @@ class UserProfileReceiveView(View):
         request.user.age = int(request.POST.get('age'))
 
         keys = self.recommend(result_list, Spot_list.data_list)
-        rand_num = random.randrange(2, 5)
+        rand_num = random.randrange(0, 3)
         key = keys[rand_num]
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
