@@ -148,3 +148,6 @@ class UserStarReceiveView(View):
         context = {'message': another_dict}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
