@@ -80,6 +80,7 @@ class UserProfileReceiveView(View):
         #         if count < n:
         #             recommend.pop(0)
         #         count = count + 1
+        print(result)
         return result
 
     def post(self, request, *args, **kwargs):
