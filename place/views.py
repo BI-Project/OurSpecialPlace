@@ -99,7 +99,7 @@ class UserProfileReceiveView(View):
         request.user.age = int(request.POST.get('age'))
 
         keys = self.recommend(result_list, Spot_list.data_list)
-        rand_num = random.randrange(0, 3)
+        rand_num = random.randrange(0, len(keys))
         key = keys[rand_num]
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
