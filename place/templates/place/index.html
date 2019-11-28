@@ -415,7 +415,7 @@
         $.ajax({
             headers: { 'X-CSRFToken' : token },
             method: 'post',
-            url: '{% url 'place:user_star_receive' %}',
+            url: "http://13.209.68.75/UserStarReceive/",
             data: star_place,
             success: function (data) {
                 alert(data['message']);
