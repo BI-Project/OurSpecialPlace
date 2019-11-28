@@ -19,6 +19,8 @@ from recommendation.src.MakeResult import FunctionBox
 
 login_url = reverse_lazy('accounts:login')
 
+temp = ''
+
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
 
@@ -100,8 +102,15 @@ class UserProfileReceiveView(View):
         request.user.age = int(request.POST.get('age'))
 
         keys = self.recommend(result_list, Spot_list.data_list)
+
         rand_num = random.randrange(0, len(keys))
+
         key = keys[rand_num]
+        keys.pop(rand_num)
+
+        rand2_num = random.randrange(0, len(keys))
+        temp = keys[rand2_num]
+
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
         # topten.CosSimilarity()
@@ -120,6 +129,8 @@ class UserStarReceiveView(View):
 
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
+        if len(another_place) == 0:
+            return temp
         another_place = another_place[0]
         another_dict = {}
 
