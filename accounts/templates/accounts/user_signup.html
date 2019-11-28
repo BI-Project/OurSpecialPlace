@@ -38,7 +38,7 @@
             align-items: center;
             flex-direction: column;
             justify-content: center;
-            width: 100%;
+            width: 90%;
             min-height: 100%;
             padding: 20px;
         }
@@ -196,7 +196,7 @@
             display: inline-block;
             font-size: 16px;
             margin: 5px;
-            width: 85%;
+            width: 80%;
             border: 2px solid #f6f6f6;
             -webkit-transition: all 0.5s ease-in-out;
             -moz-transition: all 0.5s ease-in-out;
@@ -343,15 +343,15 @@
         <!-- Icon -->
         <div class="fadeIn first">
             <br>
-            <img src="../../../static/img/password.png" style="width:50px" />
+            <img src="../../../static/img/password.png" style="width:30%" />
         </div>
 
         <form method="post">
             {% csrf_token %}
-            <p><label for="id_username">Username:</label> <input type="text" name="username" style="width: 300px;" maxlength="150" autofocus required id="id_username"></p>
-            <p><label for="id_age">Age:</label></p><p> <input type="number" name="age" style="width: 300px;" value="0" required id="id_age"></p>
-            <p><label for="id_password1">Password:</label> <input type="password" style="width: 300px;" name="password1" required id="id_password1"></p>
-            <p><label for="id_password2">Password Again</label> <input type="password" style="width: 300px;" name="password2" required id="id_password2"></p>
+            <p><label for="id_username">Username:</label> <br><input type="text" name="username" style="width: 50%;" maxlength="150" autofocus required id="id_username"></p>
+            <p><label for="id_age">Age:</label></p><p> <input type="number" name="age" style="width: 50%;" value="0" required id="id_age"></p>
+            <p><label for="id_password1">Password:</label><br> <input type="password" style="width: 50%;" name="password1" required id="id_password1"></p>
+            <p><label for="id_password2">Password Again</label><br> <input type="password" style="width: 50%;" name="password2" required id="id_password2"></p><br>
             <button type="submit">회원가입</button>
         </form>
 
