@@ -64,12 +64,11 @@ class UserProfileReceiveView(View):
         result = []
         i = 0
         for item in recommend:
-            print(item)
-            result.append(item)
+            result.append(item.key())
             i += 1
             if i >= 3:
                 break
-
+        print(result)
         return result
 
     def post(self, request, *args, **kwargs):
