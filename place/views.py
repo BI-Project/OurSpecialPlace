@@ -106,8 +106,6 @@ class UserProfileReceiveView(View):
         rand2_num = random.randrange(0, len(keys))
         global temp
         temp = keys[rand2_num]
-        print(temp)
-
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
         # topten.CosSimilarity()
@@ -126,6 +124,16 @@ class UserStarReceiveView(View):
 
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
+
+        global temp
+        another_dict = {}
+
+        place_object = get_object_or_404(Place, name=temp)
+        another_dict[temp] = [(str(place_object.picture.url)), place_object.name, place_object.pk,
+                          place_object.comment]
+
+        return another_dict
+    '''
         if len(another_place) == 0:
             global temp
             another_dict = {}
@@ -142,7 +150,7 @@ class UserStarReceiveView(View):
         another_dict[another_place] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
 
         return another_dict
-
+'''
     def post(self, request, *args, **kwargs):
         pk = request.POST.get('pk')
         place_name = request.POST.get('name')
