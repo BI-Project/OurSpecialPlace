@@ -89,14 +89,14 @@
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 550px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px">
-                        <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 300px">
+                    <div style="height:40%;">
+                        <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 80%">
                     </div>
+                    안녕하세요! 저희는 소프트웨어학부 3학년이고 현재 국내 여행지 추천 서비스를 만들고자 합니다 :) 우선 회원가입 하신 후에 시작을 눌러주시면 2가지 여행지 사진이 나옵니다. 그 중 가고 싶으신 사진을 클릭만 해주시면 됩니다~ 감사합니다!
                     <div class="button_cont" align="center">
-                        <button class="example_b" onclick="location.href='{% url 'accounts:signup' %}'" style="width: 100px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>회원가입</b></button>
-                        <br>
-                        <button class="example_b" onclick="location.href='{% url 'accounts:login' %}'" style="width: 100px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>로그인</b></button>
-                        <button class="example_b" onclick="location.href='{% url 'accounts:logout' %}'" style="width: 100px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>로그아웃</b></button>
+                        <button class="example_b" onclick="location.href='{% url 'accounts:signup' %}'" style="margin-top:30px;width: 50%;height: 50px;text-align: center;float:left;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>회원가입</b></button>
+                        <button class="example_b" onclick="location.href='{% url 'accounts:login' %}'" style="margin-top:30px;width: 50%;height: 50px;text-align: center;float:left;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>로그인</b></button>
+{#                        <button class="example_b" onclick="location.href='{% url 'accounts:logout' %}'" style="width: 100px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>로그아웃</b></button>#}
 
                     </div>
                 </div>
@@ -105,3 +105,5 @@
     </div>
 </div>
 </body>
+
+</html>
