@@ -89,15 +89,15 @@ class UserProfileReceiveView(View):
         request.user.day_N_night = int(request.POST.get('day_N_night'))
         request.user.age = int(request.POST.get('age'))
 
-        result = self.recommend(result_list, Spot_list.data_list)
+        key = self.recommend(result_list, Spot_list.data_list)
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
         # topten.CosSimilarity()
         # result = topten.Ranking() #return dict
         result_dict = {}
-        for key in result:
-            place_object = get_object_or_404(Place, name=key)
-            result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
+        # for key in result:
+        place_object = get_object_or_404(Place, name=key)
+        result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
