@@ -18,7 +18,7 @@ login_url = reverse_lazy('accounts:login')
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
     serializer_class = PlaceSerializer
-    queryset = Place.objects.all().order_by('?')[:4]
+    queryset = Place.objects.all().order_by('?')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
