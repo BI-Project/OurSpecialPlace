@@ -130,6 +130,7 @@ class UserStarReceiveView(View):
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
         if len(another_place) == 0:
+            print(temp)
             return temp
         another_place = another_place[0]
         another_dict = {}
