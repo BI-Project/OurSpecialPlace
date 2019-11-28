@@ -13,12 +13,15 @@ from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
 from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 
+from accounts.models import User
+import collections
+
 login_url = reverse_lazy('accounts:login')
 
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
     serializer_class = PlaceSerializer
-    queryset = Place.objects.all().order_by('?')[:4]
+    queryset = Place.objects.all().order_by('?')[:20]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -84,21 +87,28 @@ class UserStarReceiveView(View):
         pk = request.POST.get('pk')
         place_name = request.POST.get('name')
         star = request.POST.get('star')
-        user = request.user
         user_place_dict = {}
         place_star_dict = {}
         place_star_dict[place_name] = int(star)
-        user_place_dict[user] = place_star_dict
+        user_place_dict[request.user] = place_star_dict
 
         place = get_object_or_404(Place, pk=pk)
 
-        user_place = UserPlaceStar(user=request.user.pk, place=pk, star=star)
+        user_place = UserPlaceStar(user=request.user, place=place, star=star)
+
+        result_dict = collections.defaultdict(dict)
         user_place.save()
+        qs= UserPlaceStar.objects.values()
+        for i in qs:
+            user_name = get_object_or_404(User, pk=i['user_id']).username
+            place_name = get_object_or_404(Place, pk=i['place_id']).name
+            place_star = i['star']
+            result_dict[user_name][place_name] = place_star
 
-        UserPlaceStar.objects.filter(place=place_name)
+        collabo = CollaborativeFiltering(result_dict)
 
-        collabo = CollaborativeFiltering(user_place_dict)
+        another_place = collabo.user_recommendations(request.user.username)
 
-        context = {'message': collabo.user_reommendations(user)}
+        context = {'message': another_place}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
