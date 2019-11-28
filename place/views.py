@@ -60,13 +60,13 @@ class UserProfileReceiveView(View):
             recommend[key] = sqr_sum
 
         recommend = sorted(recommend.items(), key = operator.itemgetter(1))
-        print(recommend)
+
         result = []
         i = 0
         for item in recommend:
             result.append(item[0])
             i += 1
-            if i >= 3:
+            if i >= 5:
                 break
         return result
 
