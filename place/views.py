@@ -108,7 +108,7 @@ class UserProfileReceiveView(View):
         result_dict = {}
         # for key in result:
         place_object = get_object_or_404(Place, name=key)
-        result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
+        result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment, len(keys)]
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
