@@ -1,3 +1,5 @@
+import collections
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -7,18 +9,20 @@ from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
 
-from place.models import Place, UserPlaceStar
-from place.serializer import PlaceSerializer
+from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
+from accounts.models import User
+from place.models import Place, UserPlaceStar, TestPlace
+from place.serializer import TestPlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
-from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 
 login_url = reverse_lazy('accounts:login')
 
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
-    serializer_class = PlaceSerializer
-    queryset = Place.objects.all().order_by('?')
+
+    serializer_class = TestPlaceSerializer
+    queryset = TestPlace.objects.all().order_by('?')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -70,7 +74,6 @@ class UserProfileReceiveView(View):
         topten = FunctionBox(result_list, Spot_list.data_list)
         topten.CosSimilarity()
         result = topten.Ranking() #return dict
-        key_list = []
         result_dict = {}
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
@@ -84,21 +87,26 @@ class UserStarReceiveView(View):
         pk = request.POST.get('pk')
         place_name = request.POST.get('name')
         star = request.POST.get('star')
-        user = request.user
         user_place_dict = {}
         place_star_dict = {}
         place_star_dict[place_name] = int(star)
-        user_place_dict[user] = place_star_dict
+        user_place_dict[request.user] = place_star_dict
 
         place = get_object_or_404(Place, pk=pk)
 
-        user_place = UserPlaceStar(user=request.user.pk, place=pk, star=star)
+        user_place = UserPlaceStar(user=request.user, place=place, star=star)
+
+        result_dict = collections.defaultdict(dict)
         user_place.save()
+        qs= UserPlaceStar.objects.values()
+        for i in qs:
+            user_name = get_object_or_404(User, pk=i['user_id']).username
+            place_name = get_object_or_404(Place, pk=i['place_id']).name
+            place_star = i['star']
+            result_dict[user_name][place_name] = place_star
 
-        UserPlaceStar.objects.filter(place=place_name)
-
-        collabo = CollaborativeFiltering(user_place_dict)
-
-        context = {'message': collabo.user_reommendations(user)}
+        collabo = CollaborativeFiltering(result_dict)
+        another_place = collabo.user_recommendations(request.user.username)
+        context = {'message': another_place}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})

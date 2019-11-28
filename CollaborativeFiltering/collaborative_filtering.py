@@ -64,14 +64,14 @@ class CollaborativeFiltering:
 
     def most_similar_users(self, person, number_of_users):
         # returns the number_of_users (similar persons) for a given specific person.
-        scores = [(self.pearson_correlation(person,other_person),other_person) for other_person in self.dataset if  other_person != person ]
+        scores = [(self.pearson_correlation(person,other_person),other_person) for other_person in self.dataset if other_person != person ]
         
         # Sort the similar persons so that highest scores person will appear at the first
         scores.sort()
         scores.reverse()
         return scores[0:number_of_users]
 
-    def user_reommendations(self, person):
+    def user_recommendations(self, person):
         # Gets recommendations for a person by using a weighted average of every other user's rankings
         totals = {}
         simSums = {}
@@ -104,10 +104,5 @@ class CollaborativeFiltering:
         rankings.sort()
         rankings.reverse()
         # returns the recommended items
-        recommendataions_list = [recommend_item for score,recommend_item in rankings]
+        recommendataions_list = [recommend_item for score, recommend_item in rankings]
         return recommendataions_list
-
-
-if __name__ == "__main__":
-    collabo = CollaborativeFiltering(dataset)
-    print(collabo.user_reommendations('Toby'))
