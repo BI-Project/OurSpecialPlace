@@ -347,7 +347,7 @@
         </div>
 
         <form method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="0ao0kAVkcmfp40ZOwBv0Uwkwt2H86vgcpjYR9U4pm6qVFcKBI85BdJ6ogTjJoI9G">
+            {% csrf_token %}
             <p><label for="id_username">Username:</label> <input type="text" name="username" style="width: 300px;" maxlength="150" autofocus required id="id_username"></p>
             <p><label for="id_age">Age:</label></p><p> <input type="number" name="age" style="width: 300px;" value="0" required id="id_age"></p>
             <p><label for="id_password1">Password:</label> <input type="password" style="width: 300px;" name="password1" required id="id_password1"></p>
