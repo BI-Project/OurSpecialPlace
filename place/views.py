@@ -115,6 +115,19 @@ class UserProfileReceiveView(View):
 
 
 class UserStarReceiveView(View):
+
+    def collaboration(self,name ,result_dict):
+
+        collabo = CollaborativeFiltering(result_dict)
+        another_place = collabo.user_recommendations(name)
+
+        another_dict = {}
+
+        place_object = get_object_or_404(Place, name=another_place)
+        another_dict[another_place] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
+
+        return another_dict
+
     def post(self, request, *args, **kwargs):
         pk = request.POST.get('pk')
         place_name = request.POST.get('name')
@@ -137,13 +150,7 @@ class UserStarReceiveView(View):
             place_star = i['star']
             result_dict[user_name][place_name] = place_star
 
-        collabo = CollaborativeFiltering(result_dict)
-        another_place = collabo.user_recommendations(request.user.username)
-
-        another_dict = {}
-
-        place_object = get_object_or_404(Place, name=another_place)
-        another_dict[another_place] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment,]
+        another_dict = self.collaboration(request.user.name, result_dict)
 
         context = {'message': another_dict}
         # context ={'message': '감사합니'}
