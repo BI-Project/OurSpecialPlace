@@ -1,5 +1,6 @@
 import collections
 import random
+import operator
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -51,18 +52,22 @@ class UserProfileReceiveView(View):
         first = True
         ret = []
         min_val = 0
-        recommend = []
+        recommend = {}
         for key in place_data.keys():
             sqr_sum = 0
             for i, val in enumerate(place_data[key]):
                 sqr_sum += pow(user_attr[i] - val, 2)
-            recommend.append(key)
+            recommend[key] = sqr_sum
 
-        recommend = sorted(recommend)
+        recommend = sorted(recommend.items(), key = operator.itemgetter(1))
         print(recommend)
         result = []
-        for i in range(3):
-            result.append(recommend.pop(0))
+        i = 0
+        for item in recommend:
+            result.append(recommend[item])
+            i += 1
+            if i >= 3:
+                break
         return result
 
     def post(self, request, *args, **kwargs):
