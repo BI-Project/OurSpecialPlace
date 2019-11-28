@@ -386,7 +386,7 @@
         document.getElementById("zero").innerHTML = content_id;
 
     }
-    function more() {
+    $(function more() {
         var star_count;
         if($("#star5").is(":checked")) {
             star_count=5;
@@ -429,7 +429,7 @@
                 {#$('#final_final_place_comment').append(data['message'][name][3]);#}
             }
         });
-    }
+    })
 
 </script>
 <br><br>
@@ -697,7 +697,7 @@
                             <label for="star1" title="text">1 star</label>
                         </div>
                     </div>
-                    <button class="example_b" onclick="more()" style="float:right;margin-top:100px;width: 400px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>더 많은 추천을 받고 싶나요?</b></button>
+                    <button class="example_b" onclick="more()" style="float:right;margin-top:100px;width: 400px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" rel="nofollow noopener"><b>더 많은 추천을 받고 싶나요?</b></button>
 
                 </div>
             </div>
