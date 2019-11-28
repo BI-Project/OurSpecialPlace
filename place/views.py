@@ -1,35 +1,39 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
 
-from place.models import Place
+from place.models import Place, UserPlaceStar
 from place.serializer import PlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
 from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 
-from place.models import UserPlaceStar
-
-from place.models import UserPlaceStar
-
-import json
 login_url = reverse_lazy('accounts:login')
 
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
     serializer_class = PlaceSerializer
-    queryset = Place.objects.all().order_by('?')[:20]
+    queryset = Place.objects.all().order_by('?')[:4]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 
-# @method_decorator(login_required(login_url=login_url))
 class PlaceChoiceTemplateView(TemplateView):
     template_name = 'place/index.html'
+
+    @method_decorator(login_required(login_url=login_url))
+    def get(self, request, *args, **kwargs):
+        return super(PlaceChoiceTemplateView, self).get(request, *args, **kwargs)
+
+
+class IntroductionView(TemplateView):
+    template_name = 'place/introduction.html'
 
 
 class ThanksTemplateView(TemplateView):
@@ -39,8 +43,6 @@ class ThanksTemplateView(TemplateView):
 class UserProfileReceiveView(View):
 
     def post(self, request, *args, **kwargs):
-
-
         result_list=[]
 
         result_list.append(int(request.POST.get('natural_city')))
@@ -73,7 +75,6 @@ class UserProfileReceiveView(View):
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
             result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
-            # place_object.liked_user.add(request.user)
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
@@ -91,12 +92,10 @@ class UserStarReceiveView(View):
 
         place = get_object_or_404(Place, pk=pk)
 
-        user_place = UserPlaceStar(user=request.user, place=place, star=star)
+        user_place = UserPlaceStar(user=request.user.pk, place=pk, star=star)
         user_place.save()
 
         UserPlaceStar.objects.filter(place=place_name)
-
-
 
         collabo = CollaborativeFiltering(user_place_dict)
 
