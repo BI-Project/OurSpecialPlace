@@ -64,8 +64,7 @@ class UserProfileReceiveView(View):
         result = []
         i = 0
         for item in recommend:
-            print(item[1])
-            result.append(item[1])
+            result.append(item[0])
             i += 1
             if i >= 3:
                 break
