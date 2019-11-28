@@ -109,6 +109,7 @@ class UserProfileReceiveView(View):
         keys.pop(rand_num)
 
         rand2_num = random.randrange(0, len(keys))
+        global temp
         temp = keys[rand2_num]
 
 
