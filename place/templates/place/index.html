@@ -312,51 +312,48 @@
 
         final['accessibility'] = Math.floor(final['accessibility']/10);
 
-        final['accessibility'] = final['accessibility']*(1+(final['accessibility']-50)/100);
+        final['accessibility'] = final['accessibility']*(1+(final['accessibility']-50)/90);
         final['accessibility'] = Math.floor(final['accessibility']);
 
 
         final['age'] =Math.floor(final['age']/10);
 
-        final['age'] = final['age']*(1+(final['age']-50)/100);
+        final['age'] = final['age']*(1+(final['age']-50)/90);
         final['age'] =Math.floor(final['age']);
         final['day_N_night'] = Math.floor(final['day_N_night']/10);
 
-        final['day_N_night'] = final['day_N_night']*(1+(final['day_N_night']-50)/100);
+        final['day_N_night'] = final['day_N_night']*(1+(final['day_N_night']-50)/90);
         final['day_N_night'] = Math.floor(final['day_N_night']);
         final['dormitory_hotel'] = Math.floor(final['dormitory_hotel']/10);
 
-        final['dormitory_hotel'] = final['dormitory_hotel']*(1+(final['dormitory_hotel']-50)/100);
+        final['dormitory_hotel'] = final['dormitory_hotel']*(1+(final['dormitory_hotel']-50)/90);
         final['dormitory_hotel'] = Math.floor(final['dormitory_hotel']);
         final['history_modern'] =Math.floor(final['history_modern']/10);
 
-        final['history_modern'] = final['history_modern']*(1+(final['history_modern']-50)/100);
+        final['history_modern'] = final['history_modern']*(1+(final['history_modern']-50)/90);
         final['history_modern'] =Math.floor(final['history_modern']);
 
         final['mountain_sea'] = Math.floor(final['mountain_sea']/10);
 
-        final['mountain_sea'] = final['mountain_sea']*(1+(final['mountain_sea']-50)/100);
+        final['mountain_sea'] = final['mountain_sea']*(1+(final['mountain_sea']-50)/90);
         final['mountain_sea'] = Math.floor(final['mountain_sea']);
         final['natural_city'] = Math.floor(final['natural_city']/10);
 
-        final['natural_city'] = final['natural_city']*(1+(final['natural_city']-50)/100);
+        final['natural_city'] = final['natural_city']*(1+(final['natural_city']-50)/90);
         final['natural_city'] = Math.floor(final['natural_city']);
         final['save_flex'] = Math.floor(final['save_flex']/10);
 
-        final['save_flex'] = final['save_flex']*(1+(final['save_flex']-50)/100);
+        final['save_flex'] = final['save_flex']*(1+(final['save_flex']-50)/90);
         final['save_flex'] = Math.floor(final['save_flex']);
         final['season'] = Math.floor(final['season']/10);
 
-        final['season'] = final['season']*(1+(final['season']-50)/100);
+        final['season'] = final['season']*(1+(final['season']-50)/90);
         final['season'] = Math.floor(final['season']);
         final['static_dynamic'] = Math.floor(final['static_dynamic']/10);
 
-        final['static_dynamic'] = final['static_dynamic']*(1+(final['static_dynamic']-50)/100);
+        final['static_dynamic'] = final['static_dynamic']*(1+(final['static_dynamic']-50)/90);
         final['static_dynamic'] = Math.floor(final['static_dynamic']);
 
-        for(var item in final){
-            alert(item);
-        }
         var token = '{{ csrf_token }}';
         var result = {};
         var ss ="http://13.209.68.75/";
@@ -364,13 +361,15 @@
 
         $.ajax({
             headers: { 'X-CSRFToken' : token },
-            method: 'post',
+            method: 'POST',
             url: '{% url 'place:user_profile_receive' %}',
             data: final,
             success: function (data) {
+                alert('zz');
                 console.log(data['message']);
                 for(var name in data['message']){
-                    img_src = ss.concat(data['message'][name][0]);
+                    img_src = ss + data['message'][name][0];
+                    console.log(img_src);
                     $('#final_place_img').attr("src",img_src);
 
                     $("#final_place_name").append(data['message'][name][1]);
