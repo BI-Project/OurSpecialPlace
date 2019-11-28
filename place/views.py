@@ -20,6 +20,7 @@ login_url = reverse_lazy('accounts:login')
 
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
+
     serializer_class = TestPlaceSerializer
     queryset = TestPlace.objects.all().order_by('?')
 
@@ -104,8 +105,9 @@ class UserStarReceiveView(View):
             place_star = i['star']
             result_dict[user_name][place_name] = place_star
 
-        collabo = CollaborativeFiltering(result_dict)
-        another_place = collabo.user_recommendations(request.user.username)
-        context = {'message': another_place}
+        # collabo = CollaborativeFiltering(result_dict)
+        # another_place = collabo.user_recommendations(request.user.username)
+        # context = {'message': another_place}
+        context = {'message': '평가 감사합니다!'}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
