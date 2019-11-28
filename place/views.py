@@ -126,6 +126,7 @@ class UserStarReceiveView(View):
         another_place = collabo.user_recommendations(name)
 
         global temp
+        print(temp)
         another_dict = {}
 
         place_object = get_object_or_404(Place, name=temp)
