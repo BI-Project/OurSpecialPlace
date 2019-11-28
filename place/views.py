@@ -1,4 +1,5 @@
 import collections
+import random
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -8,14 +9,12 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
-import random
 
 from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 from accounts.models import User
 from place.models import Place, UserPlaceStar, TestPlace
 from place.serializer import TestPlaceSerializer
 from recommendation.src import Spot_list
-from recommendation.src.MakeResult import FunctionBox
 
 login_url = reverse_lazy('accounts:login')
 
@@ -63,24 +62,6 @@ class UserProfileReceiveView(View):
         result = []
         for i in range(3):
             result.append(recommend.pop(0))
-            # if first:
-            #     min_val = sqr_sum
-            #     # recommend_item = key
-            #     recommend.append(key)
-            #     first = False
-            # else:
-            #     if sqr_sum < min_val:
-            #         min_val = sqr_sum
-            #         recommend.append(key)
-        # count = 0
-        # n = len(recommend)
-        # if n > 3:
-        #     n = n-3
-        #     for item in recommend:
-        #         if count < n:
-        #             recommend.pop(0)
-        #         count = count + 1
-        print(result)
         return result
 
     def post(self, request, *args, **kwargs):
@@ -139,7 +120,12 @@ class UserStarReceiveView(View):
         another_place = collabo.user_recommendations(name)
         if len(another_place) == 0:
             global temp
-            print(temp)
+            another_dict = {}
+
+            place_object = get_object_or_404(Place, name=temp)
+            another_dict[temp] = [(str(place_object.picture.url)), place_object.name, place_object.pk,
+                                           place_object.comment]
+
             return temp
         another_place = another_place[0]
         another_dict = {}
@@ -174,4 +160,5 @@ class UserStarReceiveView(View):
         another_dict = self.collaboration(request.user.username, result_dict)
 
         context = {'message': another_dict}
+
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
