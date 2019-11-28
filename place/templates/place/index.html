@@ -212,6 +212,7 @@
                     choiceid[key] = places[key].id;
                 }
 
+ 
                 $('#place0').attr("src",choiceimg[0]);
                 $('#place1').attr("src",choiceimg[1]);
                 $('#place2').attr("src",choiceimg[2]);
@@ -258,6 +259,7 @@
         selected_places[1]=clicked_id;
         var content_id = document.getElementById("third").innerHTML;
         document.getElementById("zero").innerHTML = content_id;
+
     }
     function load4(clicked_id) {
         selected_places[2]=clicked_id;
@@ -399,13 +401,13 @@
     <div class="row" style="margin-top: 100px;">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
-                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
+                <div id="content" class="card-body" style="height: 400px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px">
-                        <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 300px">
+                    <div style="height:60%;margin-bottom: 20px">
+                        <img src="{% static "img/travel.png" %}" style="display: flex;overflow: hidden;align-content: center;justify-content: center;width: 100%;height: 90%">
                     </div>
                     <div class="button_cont" align="center">
-                        <button class="example_b" onclick="load1()" style="width: 200px;height: 50px;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>Getting started!</b></button>
+                        <button class="example_b" onclick="load1()" style="width: 80%;height: 20%;text-align: center;vertical-align: middle;line-height: 10px;" target="_blank" rel="nofollow noopener"><b>Getting started!</b></button>
                     </div>
                 </div>
             </div>
@@ -414,193 +416,181 @@
 </div>
 
 <div class="container" id="first" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton0" onclick="load2('0')" type="submit"><img id="place0" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton1" onclick="load2('1')" type="submit"><img id="place1" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton0" onclick="load2('0')" type="submit"><img id="place0" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton1" onclick="load2('1')" type="submit"><img id="place1" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="container" id="second" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
-                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%;border-radius:20px;">
+                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="container" id="third" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 <div class="container" id="fourth" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="container" id="fifth" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left;" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 <div class="container" id="sixth" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="container" id="seventh" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="container" id="eight" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+<div class="container" id="eigth" style="display: none">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="container" id="ninth" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width: 300px;float: left">
-                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
@@ -608,25 +598,230 @@
     </div>
 </div>
 <div class="container" id="tenth" style="display: none">
-    <div class="row" style="margin-top: 150px;">
+    <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card card-signin flex-row my-5" style="border-radius: 5%">
                 <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">
                     <h1>BI PROJECT</h1><br>
-                    <div style="height: 300px;margin-bottom: 20px;width:320px;float: left">
-                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
-                    </div>
-                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">
-                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>
-                    </div>
-                    <div style="height: 300px;margin-bottom: 20px;width:300px;float: left">
-                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
+                    </div><br><br>
+                    <div style="margin-left: 45%">
+                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px; line-height: 20px; font-weight: 700; float: left; padding: 5%; font-family: 'Libre Baskerville', serif;">VS</p>
+                    </div><br>
+                    <div style="height: 20%;width:100%;">
+                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="border-radius:20px;margin-bottom: 20px;float: left" src="" alt="" ></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+{##}
+{#<div class="container" id="second" style="display: none">#}
+{#    <div class="row">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%;border-radius:20px;">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton2" onclick="load3('2')" type="submit"><img id="place2" style="border-radius:20px;margin-bottom: 20px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton3" onclick="load3('3')" type="submit"><img id="place3" style="margin-bottom: 20px;border-radius:20px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{#<div class="container" id="third" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton4" onclick="load4('4')" type="submit"><img id="place4" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton5" onclick="load4('5')" type="submit"><img id="place5" style="height: 300px;margin-bottom: 20px;width:300px;float: left;border-radius:20px;" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{##}
+{#<div class="container" id="fourth" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton6" onclick="load5('6')" type="submit"><img id="place6" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton7" onclick="load5('7')" type="submit"><img id="place7" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<div class="container" id="fifth" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton8" onclick="load6('8')" type="submit"><img id="place8" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton9" onclick="load6('9')" type="submit"><img id="place9" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left;" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{##}
+{#<div class="container" id="sixth" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton10" onclick="load7('10')" type="submit"><img id="place10" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton11" onclick="load7('11')" type="submit"><img id="place11" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{#<div class="container" id="seventh" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton12" onclick="load8('12')" type="submit"><img id="place12" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton13" onclick="load8('13')" type="submit"><img id="place13" style="height: 300px;border-radius:20px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<div class="container" id="eight" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton14" onclick="load9('14')" type="submit"><img id="place14" style="height: 300px;margin-bottom: 20px;border-radius:20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton15" onclick="load9('15')" type="submit"><img id="place15" style="height: 300px;margin-bottom: 20px;width:300px;border-radius:20px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<div class="container" id="ninth" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton16" onclick="load10('16')" type="submit"><img id="place16" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton17" onclick="load10('17')" type="submit"><img id="place17" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src=""></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="container" id="tenth" style="display: none">#}
+{#    <div class="row" style="margin-top: 150px;">#}
+{#        <div class="col-lg-10 col-xl-9 mx-auto">#}
+{#            <div class="card card-signin flex-row my-5" style="border-radius: 5%">#}
+{#                <div id="content" class="card-body" style="height: 500px;background-color: lightblue;border-radius: 5%">#}
+{#                    <h1>BI PROJECT</h1><br>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton18" onclick="load11('18')" type="submit"><img id="place18" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>#}
+{#                    </div>#}
+{#                    <div style="float: left;padding-top: 130px;padding-left: 20px;padding-right: 10px;">#}
+{#                        <p style=" color: red; background: #9acfea; border-radius:5px;font-size: 20px;font-size: 30px; line-height: 20px; font-weight: 700; margin: 0 5px 24px; float: left; padding: 10px; margin: 0 5px 24px; font-family: 'Libre Baskerville', serif;">VS</p>#}
+{#                    </div>#}
+{#                    <div style="height: 20%;width:100%;">#}
+{#                        <button class="btn" id="placebutton19" onclick="load11('19')" type="submit"><img id="place19" style="border-radius:20px;height: 300px;margin-bottom: 20px;width:300px;float: left" src="" alt="" ></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 <div class="container" id="final" style="display: none">
     <div class="row" style="margin-top: 150px;">
         <div class="col-lg-10 col-xl-9 mx-auto">
