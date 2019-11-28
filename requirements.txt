@@ -1,9 +1,13 @@
 Django==2.2.7
+django-extensions==2.2.5
 django-filter==2.2.0
 djangorestframework==3.10.3
 gunicorn==20.0.3
 Markdown==3.1.1
+numpy==1.17.4
 Pillow==6.2.1
 pkg-resources==0.0.0
+pygraphviz==1.5
 pytz==2019.3
+six==1.13.0
 sqlparse==0.3.0
