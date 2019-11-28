@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
+import random
 
 from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 from accounts.models import User
@@ -45,6 +46,33 @@ class ThanksTemplateView(TemplateView):
 
 
 class UserProfileReceiveView(View):
+    def recommend(self, user_attr, place_data):
+        first = True
+        ret = []
+        min_val = 0
+        recommend = []
+        for key in place_data.keys():
+            sqr_sum = 0
+            for i, val in enumerate(place_data[key]):
+                sqr_sum += pow(user_attr[i] - val, 2)
+            if first:
+                min_val = sqr_sum
+                # recommend_item = key
+                recommend.append(key)
+                first = False
+            else:
+                if sqr_sum < min_val:
+                    min_val = sqr_sum
+                    recommend.append(key)
+        count = 0
+        n = len(recommend)
+        if n > 3:
+            n = n-3
+            for item in recommend:
+                if count < n:
+                    recommend.pop(0)
+                count = count + 1
+        return recommend
 
     def post(self, request, *args, **kwargs):
         result_list=[]
@@ -71,13 +99,17 @@ class UserProfileReceiveView(View):
         request.user.day_N_night = int(request.POST.get('day_N_night'))
         request.user.age = int(request.POST.get('age'))
 
-        topten = FunctionBox(result_list, Spot_list.data_list)
-        topten.CosSimilarity()
-        result = topten.Ranking() #return dict
+        keys = self.recommend(result_list, Spot_list.data_list)
+        rand_num = random.randrange(0, len(keys))
+        key = keys[rand_num]
+
+        # topten = FunctionBox(result_list, Spot_list.data_list)
+        # topten.CosSimilarity()
+        # result = topten.Ranking() #return dict
         result_dict = {}
-        for key in result.keys():
-            place_object = get_object_or_404(Place, name=key)
-            result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
+        # for key in result:
+        place_object = get_object_or_404(Place, name=key)
+        result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment, len(keys), rand_num]
         context = {'message': result_dict}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
 
@@ -105,9 +137,14 @@ class UserStarReceiveView(View):
             place_star = i['star']
             result_dict[user_name][place_name] = place_star
 
-        # collabo = CollaborativeFiltering(result_dict)
-        # another_place = collabo.user_recommendations(request.user.username)
-        # context = {'message': another_place}
-        context = {'message': '평가 감사합니다!'}
+        collabo = CollaborativeFiltering(result_dict)
+        another_place = collabo.user_recommendations(request.user.username)
+
+        another_dict = {}
+
+        place_object = get_object_or_404(Place, name=another_place)
+        another_dict[another_place] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment,]
+
+        context = {'message': another_dict}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
