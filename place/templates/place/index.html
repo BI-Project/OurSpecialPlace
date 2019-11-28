@@ -239,7 +239,7 @@
 
             }
         })
-    })
+    });
 
     var selected_places = new Array();
     var star_place = {};
@@ -408,9 +408,9 @@
         }
         star_place['star'] = star_count;
 
-
         var token = '{{ csrf_token }}';
         var ss ="http://13.209.68.75/";
+        var img_src;
 
         $.ajax({
             headers: { 'X-CSRFToken' : token },
