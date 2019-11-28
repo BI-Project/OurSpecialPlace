@@ -383,7 +383,7 @@
             url: '{% url 'place:user_star_receive' %}',
             data: star_place,
             success: function (data) {
-                alert("success");
+                alert(data['message']);
             }
         });
         var content_id = document.getElementById("final_final").innerHTML;

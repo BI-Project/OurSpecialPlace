@@ -41,7 +41,13 @@ INSTALLED_APPS = [
     'place.apps.PlaceConfig',
     'accounts.apps.AccountsConfig',
     'rest_framework',
+    'django_extensions',
 ]
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
