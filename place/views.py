@@ -116,7 +116,7 @@ class UserProfileReceiveView(View):
 
 class UserStarReceiveView(View):
 
-    def collaboration(self,name ,result_dict):
+    def collaboration(self, name, result_dict):
 
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
@@ -150,7 +150,7 @@ class UserStarReceiveView(View):
             place_star = i['star']
             result_dict[user_name][place_name] = place_star
 
-        another_dict = self.collaboration(request.user.name, result_dict)
+        another_dict = self.collaboration(request.user.username, result_dict)
 
         context = {'message': another_dict}
         # context ={'message': '감사합니'}
