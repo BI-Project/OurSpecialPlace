@@ -57,24 +57,30 @@ class UserProfileReceiveView(View):
             sqr_sum = 0
             for i, val in enumerate(place_data[key]):
                 sqr_sum += pow(user_attr[i] - val, 2)
-            if first:
-                min_val = sqr_sum
-                # recommend_item = key
-                recommend.append(key)
-                first = False
-            else:
-                if sqr_sum < min_val:
-                    min_val = sqr_sum
-                    recommend.append(key)
-        count = 0
-        n = len(recommend)
-        if n > 3:
-            n = n-3
-            for item in recommend:
-                if count < n:
-                    recommend.pop(0)
-                count = count + 1
-        return recommend
+            recommend.append(key)
+
+        recommend = sorted(recommend)
+        result = []
+        for i in range(3):
+            result.append(recommend.pop(0))
+            # if first:
+            #     min_val = sqr_sum
+            #     # recommend_item = key
+            #     recommend.append(key)
+            #     first = False
+            # else:
+            #     if sqr_sum < min_val:
+            #         min_val = sqr_sum
+            #         recommend.append(key)
+        # count = 0
+        # n = len(recommend)
+        # if n > 3:
+        #     n = n-3
+        #     for item in recommend:
+        #         if count < n:
+        #             recommend.pop(0)
+        #         count = count + 1
+        return result
 
     def post(self, request, *args, **kwargs):
         result_list=[]
@@ -131,7 +137,6 @@ class UserStarReceiveView(View):
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
         if len(another_place) == 0:
-            print(temp)
             return temp
         another_place = another_place[0]
         another_dict = {}
