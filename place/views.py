@@ -106,6 +106,7 @@ class UserProfileReceiveView(View):
         rand2_num = random.randrange(0, len(keys))
         global temp
         temp = keys[rand2_num]
+        print(temp)
 
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
