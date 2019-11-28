@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
 
-from place.models import Place, UserPlaceStar
+from place.models import Place, UserPlaceStar, TestPlace
 from place.serializer import PlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
@@ -21,7 +21,7 @@ login_url = reverse_lazy('accounts:login')
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
     serializer_class = PlaceSerializer
-    queryset = Place.objects.all().order_by('?')[:20]
+    queryset = TestPlace.objects.all().order_by('?')[:20]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -73,7 +73,6 @@ class UserProfileReceiveView(View):
         topten = FunctionBox(result_list, Spot_list.data_list)
         topten.CosSimilarity()
         result = topten.Ranking() #return dict
-        key_list = []
         result_dict = {}
         for key in result.keys():
             place_object = get_object_or_404(Place, name=key)
@@ -106,9 +105,7 @@ class UserStarReceiveView(View):
             result_dict[user_name][place_name] = place_star
 
         collabo = CollaborativeFiltering(result_dict)
-
         another_place = collabo.user_recommendations(request.user.username)
-
         context = {'message': another_place}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
