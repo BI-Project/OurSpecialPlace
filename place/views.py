@@ -1,3 +1,5 @@
+import collections
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -7,20 +9,18 @@ from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
 
+from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
+from accounts.models import User
 from place.models import Place, UserPlaceStar, TestPlace
-from place.serializer import PlaceSerializer
+from place.serializer import TestPlaceSerializer
 from recommendation.src import Spot_list
 from recommendation.src.MakeResult import FunctionBox
-from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
-
-from accounts.models import User
-import collections
 
 login_url = reverse_lazy('accounts:login')
 
 
 class PlaceChoiceListView(mixins.ListModelMixin, generics.GenericAPIView):
-    serializer_class = PlaceSerializer
+    serializer_class = TestPlaceSerializer
     queryset = TestPlace.objects.all().order_by('?')[:20]
 
     def get(self, request, *args, **kwargs):
