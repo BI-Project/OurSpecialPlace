@@ -45,6 +45,24 @@ class ThanksTemplateView(TemplateView):
 
 
 class UserProfileReceiveView(View):
+    def recommend(self, user_attr, place_data):
+        first= True
+        ret = []
+        min_val = 0
+        recommend_item = ''
+        for key in place_data.keys():
+            sqr_sum = 0
+            for i, val in enumerate(place_data[key]):
+                sqr_sum += pow(user_attr[i] - val, 2)
+            if first:
+                min_val = sqr_sum
+                recommend_item = key
+                first = False
+            else:
+                if sqr_sum < min_val:
+                    min_val = sqr_sum
+                    recommend_item = key
+        return recommend_item
 
     def post(self, request, *args, **kwargs):
         result_list=[]
@@ -71,11 +89,13 @@ class UserProfileReceiveView(View):
         request.user.day_N_night = int(request.POST.get('day_N_night'))
         request.user.age = int(request.POST.get('age'))
 
-        topten = FunctionBox(result_list, Spot_list.data_list)
-        topten.CosSimilarity()
-        result = topten.Ranking() #return dict
+        result = self.recommend(result_list, Spot_list.data_list)
+
+        # topten = FunctionBox(result_list, Spot_list.data_list)
+        # topten.CosSimilarity()
+        # result = topten.Ranking() #return dict
         result_dict = {}
-        for key in result.keys():
+        for key in result:
             place_object = get_object_or_404(Place, name=key)
             result_dict[key] = [(str(place_object.picture.url)), place_object.name, place_object.pk, place_object.comment]
         context = {'message': result_dict}
