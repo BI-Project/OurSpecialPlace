@@ -59,6 +59,7 @@ class UserProfileReceiveView(View):
             recommend.append(key)
 
         recommend = sorted(recommend)
+        print(recommend)
         result = []
         for i in range(3):
             result.append(recommend.pop(0))
