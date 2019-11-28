@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import View
 from rest_framework import mixins, generics
+import random
 
 from CollaborativeFiltering.collaborative_filtering import CollaborativeFiltering
 from accounts.models import User
@@ -49,20 +50,28 @@ class UserProfileReceiveView(View):
         first= True
         ret = []
         min_val = 0
-        recommend_item = ''
+        recommend = []
         for key in place_data.keys():
             sqr_sum = 0
             for i, val in enumerate(place_data[key]):
                 sqr_sum += pow(user_attr[i] - val, 2)
             if first:
                 min_val = sqr_sum
-                recommend_item = key
+                # recommend_item = key
                 first = False
             else:
                 if sqr_sum < min_val:
                     min_val = sqr_sum
-                    recommend_item = key
-        return recommend_item
+                    recommend.append(key)
+        count = 0
+        n = len(recommend)
+        if n > 5:
+            n = n-5
+            for item in recommend:
+                if count < n:
+                    recommend.pop(0)
+                count = count + 1
+        return recommend
 
     def post(self, request, *args, **kwargs):
         result_list=[]
@@ -89,7 +98,9 @@ class UserProfileReceiveView(View):
         request.user.day_N_night = int(request.POST.get('day_N_night'))
         request.user.age = int(request.POST.get('age'))
 
-        key = self.recommend(result_list, Spot_list.data_list)
+        keys = self.recommend(result_list, Spot_list.data_list)
+        rand_num = random.randrange(2, 5)
+        key = keys[rand_num]
 
         # topten = FunctionBox(result_list, Spot_list.data_list)
         # topten.CosSimilarity()
