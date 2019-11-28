@@ -121,6 +121,7 @@ class UserStarReceiveView(View):
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
         another_place = another_place[0]
+        print(another_place)
 
         another_dict = {}
 
@@ -154,5 +155,4 @@ class UserStarReceiveView(View):
         another_dict = self.collaboration(request.user.username, result_dict)
 
         context = {'message': another_dict}
-        # context ={'message': '감사합니'}
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
