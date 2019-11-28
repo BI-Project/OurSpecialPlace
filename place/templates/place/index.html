@@ -366,7 +366,6 @@
             data: final,
             success: function (data) {
                 console.log(data['message']);
-                console.log(data['message'][name][4]);
                 for(var name in data['message']){
                     img_src = ss + data['message'][name][0];
                     console.log(img_src);
