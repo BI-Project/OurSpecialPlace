@@ -68,6 +68,7 @@ class UserProfileReceiveView(View):
             i += 1
             if i >= 5:
                 break
+        print(result)
         return result
 
     def post(self, request, *args, **kwargs):
