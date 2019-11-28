@@ -121,8 +121,6 @@ class UserStarReceiveView(View):
         collabo = CollaborativeFiltering(result_dict)
         another_place = collabo.user_recommendations(name)
         another_place = another_place[0]
-        print(another_place)
-
         another_dict = {}
 
         place_object = get_object_or_404(Place, name=another_place)
