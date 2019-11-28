@@ -329,7 +329,7 @@
         final['dormitory_hotel'] = final['dormitory_hotel']*(1+(final['dormitory_hotel']-50)/100);
         final['dormitory_hotel'] = Math.floor(final['dormitory_hotel']);
         final['history_modern'] =Math.floor(final['history_modern']/10);
-        
+
         final['history_modern'] = final['history_modern']*(1+(final['history_modern']-50)/100);
         final['history_modern'] =Math.floor(final['history_modern']);
 
@@ -359,7 +359,7 @@
         }
         var token = '{{ csrf_token }}';
         var result = {};
-        var ss ="http://127.0.0.1:8000/";
+        var ss ="http://13.209.68.75/";
         var img_src;
 
         $.ajax({
