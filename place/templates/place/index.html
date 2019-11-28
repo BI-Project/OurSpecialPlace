@@ -418,7 +418,7 @@
             success: function (data) {
                 var content_id = document.getElementById("final_final").innerHTML;
                 document.getElementById("zero").innerHTML = content_id;
-                var img_src = ss.concat(data['message'][name][0]);
+                var img_src = ss + data['message'][name][0];
                 $('#final_final_place_img').attr("src",img_src);
 
                 $("#final_final_place_name").append(data['message'][name][1]);
