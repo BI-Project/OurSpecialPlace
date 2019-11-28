@@ -422,6 +422,11 @@
         });
         var content_id = document.getElementById("final_final").innerHTML;
         document.getElementById("zero").innerHTML = content_id;
+        img_src = ss.concat(data['message'][name][0]);
+        $('#final_final_place_img').attr("src",img_src);
+
+        $("#final_final_place_name").append(data['message'][name][1]);
+        $('#final_final_place_comment').append(data['message'][name][3]);
     }
 
 </script>
