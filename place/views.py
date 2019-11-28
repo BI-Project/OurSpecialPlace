@@ -47,7 +47,7 @@ class ThanksTemplateView(TemplateView):
 
 class UserProfileReceiveView(View):
     def recommend(self, user_attr, place_data):
-        first= True
+        first = True
         ret = []
         min_val = 0
         recommend = []
@@ -58,6 +58,7 @@ class UserProfileReceiveView(View):
             if first:
                 min_val = sqr_sum
                 # recommend_item = key
+                recommend.append(key)
                 first = False
             else:
                 if sqr_sum < min_val:
@@ -136,9 +137,9 @@ class UserStarReceiveView(View):
             place_star = i['star']
             result_dict[user_name][place_name] = place_star
 
-        # collabo = CollaborativeFiltering(result_dict)
-        # another_place = collabo.user_recommendations(request.user.username)
-        # context = {'message': another_place}
-        context = {'message': '평가 감사합니다!'}
+        collabo = CollaborativeFiltering(result_dict)
+        another_place = collabo.user_recommendations(request.user.username)
+        context = {'message': another_place}
+        # context = {'message': '평가 감사합니다!'}
 
         return JsonResponse(context, json_dumps_params={'ensure_ascii': True})
